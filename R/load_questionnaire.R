@@ -328,10 +328,6 @@ load_questionnaire<-function(data,
 
 
 
-
-
-
-
 # skiplogic can apply to a whole group, so we need to (recursively) attach a group's condition to each individual questions condition when loading the questionnaire
 add_group_conditions_to_question_conditions<-function(questions){
   group_conditions<-NULL
