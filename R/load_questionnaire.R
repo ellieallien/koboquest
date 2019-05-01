@@ -172,6 +172,8 @@ load_questionnaire<-function(data,
       if(!(question.name %in% questions$name)){return(FALSE)}
       qid<-which(questions$name==question.name)
       if(length(grep("select_multiple",questions$type[qid]))>0){return(TRUE)}
+      if(length(grep("selectmultiple",questions$type[qid]))>0){return(TRUE)}
+      if(length(grep("select.multiple",questions$type[qid]))>0){return(TRUE)}
       return(FALSE)
     }
 
