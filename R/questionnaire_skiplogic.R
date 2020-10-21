@@ -32,7 +32,6 @@ question_is_skipped_apply_condition_to_data<-function(data,condition){
   relevant<-with(data,{
   relevant<-tryCatch({
     relevant<-condition_rexpression %>% parse(text = .) %>% eval
-
     relevant
   },error=function(e){
 
@@ -61,11 +60,9 @@ rify_condition<-function(x){
 }
 
 
-
-
 rify_varnames_in_string<-function(x){
   # turns "${varname}" into varname by removing any "{", "}",  "$"
-    x<-gsub("[\\{\\$\\}]","",x)
+    x<-gsub("[\\\\$\\]","",x)
   }
 
 rify_logical_operators<-function(x){
@@ -113,8 +110,11 @@ rify_selected<-function(x){
 rify_isolated_selected_condition<-function(x){
   selected_start_pattern<-"selected[[:space:]]*\\([[:space:]]*\\$\\{"
   selected_middle_pattern<-'\\}[[:space:]]*,[[:space:]]*["\']*'
-  selected_end_pattern<-'["\']*\\)'
-  gsub(selected_start_pattern,"",x) %>% gsub(selected_middle_pattern,'==\"',.) %>% gsub(selected_end_pattern,"\"",.) %>% paste0("(",.,")")
+  selected_end_pattern <-'["\']*\\)'
+  # expression(var_list <- strsplit(as.character(data$groupepers_derniermois), " "),
+  #            var_evaluated <- sapply(var_list, function(x){any("pers_deplace" %in% x)}) %>% unlist)
+   gsub(selected_end_pattern,'"%in% x)}) %>% unlist',x) %>% gsub(selected_middle_pattern,'%>% as.character %>% strsplit (., " ")
+                                                                 var_evaluated <- sapply(var_list, function(x){any("',.) %>% gsub(selected_start_pattern,'var_list <-',.) %>% paste0(.)
 }
 
 
@@ -129,3 +129,4 @@ extract_all_varnames_from_condition<-function(condition,rify=T){
   if(rify){variables %<>% gsub(var_start_pattern,"",.) %>% gsub(var_end_pattern,"",.)}
   return(variables)
 }
+

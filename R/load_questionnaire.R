@@ -363,7 +363,7 @@ add_group_conditions_to_question_conditions<-function(questions){
     if(all(all_condition_for_this_q=="")){
         all_condition_for_this_q<-""
       }else{
-        all_condition_for_this_q<-paste("(",all_condition_for_this_q[all_condition_for_this_q!=""],")")
+        all_condition_for_this_q<-paste(all_condition_for_this_q[all_condition_for_this_q!=""])
       }
 
     all_condition_for_this_q_combined<-paste(all_condition_for_this_q,collapse=" and ")
